@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12352f">
+  <title>کارگەی کۆنکرێتی دەلۆ | HR</title>
+  <style>
+    :root { --ink:#14221f; --muted:#64736e; --paper:#fffdf8; --cream:#f4f1e9; --green:#12352f; --green-2:#1e5b4f; --orange:#d86e35; --line:#dedfd6; --shadow:0 18px 50px #19332b18; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--cream); font-family:"Noto Sans Arabic","Segoe UI",Tahoma,sans-serif; line-height:1.7; }
+    button, input, select, textarea { font:inherit; }
+    button { cursor:pointer; }
+    .app-shell { min-height:100vh; background:radial-gradient(circle at 10% 0%, #e9d9bf 0 16%, transparent 36%), linear-gradient(145deg,#f4f1e9,#e9eee8); }
+    .topbar { color:#fff; background:var(--green); padding:22px clamp(18px,4vw,58px); display:flex; gap:24px; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:5; box-shadow:0 3px 20px #09231d33; }
+    .brand { display:flex; align-items:center; gap:13px; }
+    .brand-mark { width:45px; height:45px; display:grid; place-items:center; border-radius:13px; background:var(--orange); font-size:25px; }
+    .brand h1 { font-size:1.24rem; margin:0; letter-spacing:0; }
+    .brand p { margin:0; color:#c8ddd6; font-size:.82rem; }
+    .topbar-date { color:#b9d1c9; font-size:.88rem; text-align:left; }
+    main { width:min(1240px,calc(100% - 32px)); margin:30px auto 70px; }
+    .hero { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:24px; }
+    .eyebrow { color:var(--orange); font-weight:800; font-size:.85rem; margin:0 0 5px; }
+    h2 { margin:0; font-size:clamp(1.6rem,3vw,2.45rem); line-height:1.2; }
+    .hero p:last-child { color:var(--muted); margin:8px 0 0; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px; }
+    .stat { background:var(--paper); border:1px solid #fff; border-radius:14px; box-shadow:var(--shadow); padding:16px 20px; }
+    .stat strong { display:block; font-size:1.8rem; color:var(--green); line-height:1.2; }
+    .stat span { color:var(--muted); font-size:.87rem; }
+    .workspace { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr); gap:22px; align-items:start; }
+    .panel { background:var(--paper); border:1px solid #ffffff; border-radius:18px; box-shadow:var(--shadow); padding:clamp(18px,3vw,30px); }
+    .panel-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; border-bottom:1px solid var(--line); padding-bottom:15px; margin-bottom:20px; }
+    .panel-heading h3 { margin:0; font-size:1.15rem; }
+    .panel-heading small { color:var(--muted); }
+    .form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:17px; }
+    .field { display:flex; flex-direction:column; gap:6px; }
+    .field.full { grid-column:1/-1; }
+    label { font-weight:700; font-size:.9rem; }
+    input, select, textarea { width:100%; border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:9px; padding:10px 12px; outline:none; transition:.18s ease; }
+    input:focus, select:focus, textarea:focus { border-color:var(--green-2); box-shadow:0 0 0 3px #1e5b4f1c; }
+    textarea { min-height:92px; resize:vertical; }
+    .dynamic-box { margin-top:18px; padding:18px; border:1px dashed #bdcfc7; border-radius:13px; background:#f1f6f2; }
+    .dynamic-box:empty { display:none; }
+    .dynamic-title { color:var(--green-2); font-weight:800; margin:0 0 12px; }
+    .actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
+    .btn { border:0; border-radius:9px; padding:11px 18px; font-weight:800; transition:transform .15s,box-shadow .15s; }
+    .btn:hover { transform:translateY(-1px); box-shadow:0 7px 18px #12352f20; }
+    .btn-primary { background:var(--orange); color:#fff; }
+    .btn-secondary { background:#e5eee9; color:var(--green); }
+    .btn-quiet { background:transparent; color:var(--muted); border:1px solid var(--line); }
+    .employee-list { display:flex; flex-direction:column; gap:9px; max-height:405px; overflow:auto; }
+    .employee-item { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:11px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; }
+    .employee-item strong { display:block; }
+    .employee-item small { color:var(--muted); }
+    .employee-item button { border:0; background:#eef3ef; color:var(--green); border-radius:7px; padding:5px 8px; }
+    .history-panel { margin-top:22px; }
+    .history-tools { display:flex; gap:10px; margin-bottom:15px; }
+    .history-tools input { max-width:340px; }
+    .history-list { display:grid; gap:10px; }
+    .history-item { display:grid; grid-template-columns:1fr auto; align-items:center; gap:12px; border:1px solid var(--line); border-radius:11px; padding:12px 15px; background:#fff; }
+    .history-item strong { color:var(--green); }
+    .history-item small { display:block; color:var(--muted); }
+    .history-actions { display:flex; gap:7px; }
+    .history-actions button { border:0; border-radius:7px; padding:6px 9px; background:#edf2ef; color:var(--green); }
+    .empty { color:var(--muted); text-align:center; padding:25px 10px; }
+    .toast { position:fixed; left:20px; bottom:20px; color:#fff; background:var(--green); padding:11px 16px; border-radius:9px; box-shadow:var(--shadow); opacity:0; transform:translateY(12px); pointer-events:none; transition:.25s; z-index:10; }
+    .toast.show { opacity:1; transform:none; }
+    .print-sheet { display:none; }
+    @media (max-width:850px) { .workspace { grid-template-columns:1fr; } .topbar-date { display:none; } }
+    @media (max-width:600px) { main { width:min(100% - 20px,1240px); margin-top:18px; } .topbar { padding:15px; } .stats { gap:8px; } .stat { padding:12px; } .stat strong { font-size:1.4rem; } .form-grid { grid-template-columns:1fr; } .field.full { grid-column:auto; } .hero { display:block; } .history-item { grid-template-columns:1fr; } }
+    @media print {
+      body { background:#fff; color:#000; }
+      .app-shell > *:not(.print-sheet), .toast { display:none !important; }
+      .print-sheet { display:block !important; direction:rtl; font-family:"Noto Sans Arabic","Segoe UI",Tahoma,sans-serif; padding:26px; }
+      .print-header { border-bottom:3px solid #12352f; padding-bottom:14px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:start; }
+      .print-header h1 { margin:0; color:#12352f; font-size:24px; }
+      .print-header p { margin:3px 0 0; color:#555; }
+      .print-title { text-align:center; margin:22px 0; font-size:22px; }
+      .print-meta { display:grid; grid-template-columns:1fr 1fr; gap:10px; border:1px solid #bbb; padding:13px; }
+      .print-table { width:100%; border-collapse:collapse; margin-top:18px; }
+      .print-table th, .print-table td { border:1px solid #aaa; padding:9px; text-align:right; vertical-align:top; }
+      .print-table th { width:34%; background:#f0f0f0; }
+      .print-notes { border:1px solid #aaa; min-height:80px; padding:12px; margin-top:18px; white-space:pre-wrap; }
+      .signatures { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:65px; text-align:center; }
+      .signatures div { border-top:1px solid #555; padding-top:8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">🏗️</div><div><h1>کارگەی کۆنکرێتی دەلۆ</h1><p>سیستەمی بەڕێوەبردنی سەرچاوە مرۆییەکان</p></div></div>
+      <div class="topbar-date" id="todayLabel"></div>
+    </header>
+    <main>
+      <section class="hero"><div><p class="eyebrow">ناوەندی کارگێڕی</p><h2>فۆرمەکانت بە ڕێک و پێک بەڕێوەببە</h2><p>کارمەند زیاد بکە، فۆرم دروست بکە، و مێژووی هەموو بڕیارەکانت هەڵبگرە.</p></div></section>
+      <section class="stats"><div class="stat"><strong id="employeeCount">0</strong><span>کارمەندی تۆمارکراو</span></div><div class="stat"><strong id="formCount">0</strong><span>فۆرمی دروستکراو</span></div><div class="stat"><strong id="monthCount">0</strong><span>فۆرمی ئەم مانگە</span></div></section>
+      <section class="workspace">
+        <section class="panel">
+          <div class="panel-heading"><div><h3>دروستکردنی فۆرمی نوێ</h3><small>زانیارییەکان پاش خەزنکردن لە مێژوودا دەمێننەوە.</small></div></div>
+          <form id="hrForm">
+            <div class="form-grid">
+              <div class="field"><label for="employeeName">ناوی کارمەند *</label><input id="employeeName" list="employeeNames" required placeholder="نموونە: ئەحمەد محەمەد"><datalist id="employeeNames"></datalist></div>
+              <div class="field"><label for="employeeId">ژمارەی کارمەند</label><input id="employeeId" placeholder="نموونە: EMP-001"></div>
+              <div class="field"><label for="formType">جۆری فۆرم *</label><select id="formType" required><option value="">هەڵبژێرە...</option><option value="warning">سزادان / ئاگاداریکردنەوە</option><option value="termination">دەرکردن لە کار</option><option value="advance">سلفە</option><option value="promotion">بەرزکردنەوە</option><option value="leave">مۆڵەت</option><option value="bonus">پاداشت</option><option value="transfer">گواستنەوە</option><option value="contract">دەستنیشانکردن</option></select></div>
+              <div class="field"><label for="formDate">بەروار *</label><input id="formDate" type="date" required></div>
+            </div>
+            <div id="dynamicFields" class="dynamic-box"></div>
+            <div class="field" style="margin-top:18px"><label for="notes">تێبینی گشتی</label><textarea id="notes" placeholder="هەر تێبینییەکی پێویست بنووسە..."></textarea></div>
+            <div class="actions"><button class="btn btn-primary" type="submit">خەزنکردن و ئامادەکردنی PDF</button><button class="btn btn-secondary" type="button" id="printButton">چاپی PDF</button><button class="btn btn-quiet" type="reset">پاککردنەوە</button></div>
+          </form>
+        </section>
+        <aside class="panel">
+          <div class="panel-heading"><div><h3>کارمەندەکان</h3><small>خێرا زانیارییەکەیان پڕ بکەرەوە</small></div></div>
+          <div id="employeeList" class="employee-list"></div>
+        </aside>
+      </section>
+      <section class="panel history-panel">
+        <div class="panel-heading"><div><h3>مێژووی فۆرمەکان</h3><small>فۆرمە خەزنکراوەکان لێرە دەبینیت.</small></div><button class="btn btn-quiet" id="clearHistory" type="button">سڕینەوەی هەموو مێژوو</button></div>
+        <div class="history-tools"><input id="historySearch" placeholder="گەڕان بە ناو یان جۆری فۆرم..."></div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+    </main>
+    <div class="toast" id="toast"></div>
+    <section class="print-sheet" id="printSheet"></section>
+  </div>
+<script>
+  const templates = {
+    warning:{title:'فۆرمی سزادان / ئاگاداریکردنەوە',fields:[['warningType','جۆری سزا','select',['ئاگاداری زارۆکی','ئاگاداری نووسراو','سزای مامناوەند','سزای سەخت']],['reason','هۆکار','textarea'],['details','وردەکاری','textarea']]},
+    termination:{title:'فۆرمی دەرکردن لە کار',fields:[['terminationType','جۆری دەرکردن','select',['بەهۆی کارمەندەوە','بەهۆی کارگەوە','کۆتایی مووددەت','دەرکردنی کاتی']],['reason','هۆکار','textarea'],['lastWorkDay','دوا ڕۆژی کار','date'],['compensation','قەرەبوو (IQD)','number']]},
+    advance:{title:'فۆرمی سلفە',fields:[['amount','بڕی سلفە (IQD)','number'],['installments','ژمارەی قیست','number'],['reason','هۆکاری داواکردن','textarea'],['startDate','دەستپێکی گەڕاندنەوە','date']]},
+    promotion:{title:'فۆرمی بەرزکردنەوە',fields:[['currentPosition','پۆستی ئێستا','text'],['newPosition','پۆستی نوێ','text'],['currentSalary','مووچەی ئێستا (IQD)','number'],['newSalary','مووچەی نوێ (IQD)','number'],['effectiveDate','بەرواری کارپێکردن','date']]},
+    leave:{title:'فۆرمی مۆڵەت',fields:[['leaveType','جۆری مۆڵەت','select',['مۆڵەتی ساڵانە','مۆڵەتی نەخۆشی','مۆڵەتی بێ مووچە','مۆڵەتی تایبەت']],['startDate','دەستپێک','date'],['endDate','کۆتایی','date'],['days','ژمارەی ڕۆژەکان','number'],['reason','هۆکار','textarea']]},
+    bonus:{title:'فۆرمی پاداشت',fields:[['bonusType','جۆری پاداشت','select',['پاداشتی ئەنجامدان','پاداشتی پرۆژە','پاداشتی ساڵانە','پاداشتی تایبەت']],['amount','بڕی پاداشت (IQD)','number'],['reason','هۆکاری پاداشت','textarea']]},
+    transfer:{title:'فۆرمی گواستنەوە',fields:[['currentDept','بەشی ئێستا','text'],['newDept','بەشی نوێ','text'],['currentLocation','شوێنی ئێستا','text'],['newLocation','شوێنی نوێ','text'],['effectiveDate','بەرواری کارپێکردن','date'],['reason','هۆکاری گواستنەوە','textarea']]},
+    contract:{title:'فۆرمی دەستنیشانکردن',fields:[['position','پۆست','text'],['department','بەش','text'],['salary','مووچە (IQD)','number'],['startDate','دەستپێکی کار','date'],['contractType','جۆری گرێبەست','select',['هەمیشەیی','کاتی','پرۆژە','تاقیکردنەوە']] ]}
+  };
+  const $ = id => document.getElementById(id);
+  const read = key => JSON.parse(localStorage.getItem(key) || '[]');
+  const write = (key,value) => localStorage.setItem(key,JSON.stringify(value));
+  let employees = read('daloEmployees'); let history = read('daloForms');
+  const today = new Date().toISOString().slice(0,10); $('formDate').value = today; $('todayLabel').textContent = new Intl.DateTimeFormat('ku',{dateStyle:'full'}).format(new Date());
+  function makeField(field) { const [id,label,type,options] = field; const wrapper=document.createElement('div'); wrapper.className='field' + (type==='textarea'?' full':''); const labelEl=document.createElement('label'); labelEl.htmlFor=id; labelEl.textContent=label; wrapper.append(labelEl); let input;
+    if(type==='select'){ input=document.createElement('select'); input.innerHTML='<option value="">هەڵبژێرە...</option>'+options.map(x=>`<option>${x}</option>`).join(''); }
+    else { input=document.createElement(type==='textarea'?'textarea':'input'); if(type!=='textarea') input.type=type; }
+    input.id=id; wrapper.append(input); return wrapper; }
+  $('formType').addEventListener('change', () => { const template=templates[$('formType').value]; $('dynamicFields').innerHTML = template ? `<p class="dynamic-title">زانیاری تایبەتی فۆرم</p>` : ''; if(template) template.fields.forEach(field => $('dynamicFields').append(makeField(field))); });
+  function currentData() { const type=$('formType').value, template=templates[type]; const fields={}; (template?.fields || []).forEach(([id]) => fields[id]=$(id)?.value || ''); return {employeeName:$('employeeName').value.trim(),employeeId:$('employeeId').value.trim(),type,title:template?.title || '',date:$('formDate').value,notes:$('notes').value.trim(),fields}; }
+  function renderEmployees() { $('employeeCount').textContent=employees.length; $('employeeNames').innerHTML=employees.map(x=>`<option value="${escapeHtml(x.name)}">`).join(''); $('employeeList').innerHTML=employees.length ? employees.map((x,i)=>`<div class="employee-item"><div><strong>${escapeHtml(x.name)}</strong><small>${escapeHtml(x.id || 'بێ ژمارە')}</small></div><button type="button" data-employee="${i}">هەڵبژێرە</button></div>`).join('') : '<div class="empty">هێشتا هیچ کارمەندێک تۆمار نەکراوە.</div>'; }
+  function renderHistory() { const query=$('historySearch').value.trim().toLowerCase(); const visible=history.filter(x => `${x.employeeName} ${x.title}`.toLowerCase().includes(query)); $('formCount').textContent=history.length; $('monthCount').textContent=history.filter(x=>x.date.slice(0,7)===today.slice(0,7)).length; $('historyList').innerHTML=visible.length ? visible.map((x,i)=>`<article class="history-item"><div><strong>${escapeHtml(x.title)}</strong><small>${escapeHtml(x.employeeName)} ${x.employeeId?'· '+escapeHtml(x.employeeId):''} · ${escapeHtml(x.date)}</small></div><div class="history-actions"><button type="button" data-print="${i}">چاپ</button><button type="button" data-delete="${i}">سڕینەوە</button></div></article>`).join('') : '<div class="empty">هیچ فۆرمێک نەدۆزرایەوە.</div>'; }
+  function escapeHtml(value) { return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char])); }
+  function buildPrint(data) { const rows=Object.entries(data.fields).filter(([,value])=>value).map(([id,value])=>{ const field=templates[data.type].fields.find(x=>x[0]===id); return `<tr><th>${escapeHtml(field?.[1] || id)}</th><td>${escapeHtml(value).replace(/\n/g,'<br>')}</td></tr>`; }).join(''); $('printSheet').innerHTML=`<div class="print-header"><div><h1>کارگەی کۆنکرێتی دەلۆ</h1><p>سیستەمی بەڕێوەبردنی سەرچاوە مرۆییەکان</p></div><div>${escapeHtml(data.date)}</div></div><h2 class="print-title">${escapeHtml(data.title)}</h2><div class="print-meta"><div><b>ناوی کارمەند:</b> ${escapeHtml(data.employeeName)}</div><div><b>ژمارەی کارمەند:</b> ${escapeHtml(data.employeeId || '---')}</div></div><table class="print-table"><tbody>${rows}</tbody></table><div class="print-notes"><b>تێبینی:</b><br>${escapeHtml(data.notes || '---').replace(/\n/g,'<br>')}</div><div class="signatures"><div>کارمەند<br>واژوو: __________</div><div>بەڕێوەبەری HR<br>واژوو: __________</div><div>بەڕێوەبەری گشتی<br>واژوو: __________</div></div>`; }
+  function printData(data=currentData()) { if(!data.type || !data.employeeName){ toast('تکایە ناو و جۆری فۆرم پڕ بکەرەوە.'); return; } buildPrint(data); setTimeout(()=>window.print(),80); }
+  function toast(message) { $('toast').textContent=message; $('toast').classList.add('show'); setTimeout(()=>$('toast').classList.remove('show'),2600); }
+  $('hrForm').addEventListener('submit', e => { e.preventDefault(); const data=currentData(); history.unshift({...data,id:crypto.randomUUID?.() || Date.now().toString()}); if(!employees.some(x=>x.name===data.employeeName)){ employees.unshift({name:data.employeeName,id:data.employeeId}); write('daloEmployees',employees); } write('daloForms',history); renderEmployees(); renderHistory(); buildPrint(data); toast('فۆرمەکە خەزن کرا. ئێستا دەتوانیت لە print dialog ـەکەدا Save as PDF هەڵبژێریت.'); });
+  $('printButton').addEventListener('click',()=>printData()); $('historySearch').addEventListener('input',renderHistory);
+  $('employeeList').addEventListener('click',e=>{ const index=e.target.dataset.employee; if(index===undefined)return; $('employeeName').value=employees[index].name; $('employeeId').value=employees[index].id; $('employeeName').focus(); });
+  $('historyList').addEventListener('click',e=>{ const printIndex=e.target.dataset.print; const deleteIndex=e.target.dataset.delete; if(printIndex!==undefined) printData(history[printIndex]); if(deleteIndex!==undefined){ history.splice(deleteIndex,1); write('daloForms',history); renderHistory(); toast('فۆرمەکە سڕایەوە.'); } });
+  $('clearHistory').addEventListener('click',()=>{ if(!history.length || confirm('دڵنیایت لە سڕینەوەی هەموو مێژوو؟')){ history=[]; write('daloForms',history); renderHistory(); toast('مێژوو پاک کرایەوە.'); } });
+  $('hrForm').addEventListener('reset',()=>setTimeout(()=>{$('dynamicFields').innerHTML=''; $('formType').value=''; $('formDate').value=today;},0));
+  renderEmployees(); renderHistory();
+</script>
+</body>
+</html>
